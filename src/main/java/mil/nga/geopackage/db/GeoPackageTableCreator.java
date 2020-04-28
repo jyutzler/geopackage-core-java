@@ -218,6 +218,13 @@ public class GeoPackageTableCreator {
 	public static final String EXT_TM_VW = getScript("ext_tm_vw");
 
 	/**
+	 * Semantic Annotations Extension script
+	 * (gpkgext_semantic_annotations and gpkgext_sa_reference)
+	 *
+	 */
+	public static final String EXT_SA_TABLES = getScript("ext_sa_tables");
+
+	/**
 	 * Table Index script
 	 *
 	 * @since 3.3.0
@@ -666,4 +673,11 @@ public class GeoPackageTableCreator {
 	public int createExtTileMatrixVariableWidths() {
 		return execSQLScript(EXT_TM_VW);
 	}
+
+	/**
+	 * Create the Semantic Annotations Extension tables
+	 *
+	 * @return executed statements
+	 */
+    public int createSemanticAnnotationsExtension() { return execSQLScript(EXT_SA_TABLES); }
 }

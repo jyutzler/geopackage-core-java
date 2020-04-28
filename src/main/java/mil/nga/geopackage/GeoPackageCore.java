@@ -27,6 +27,8 @@ import mil.nga.geopackage.extension.link.FeatureTileLinkDao;
 import mil.nga.geopackage.extension.portrayal.*;
 import mil.nga.geopackage.extension.related.ExtendedRelationsDao;
 import mil.nga.geopackage.extension.scale.TileScalingDao;
+import mil.nga.geopackage.extension.semantic.SemanticAnnotationReferenceDao;
+import mil.nga.geopackage.extension.semantic.SemanticAnnotationsDao;
 import mil.nga.geopackage.extension.tile_matrix_set.ExtTileMatrixDao;
 import mil.nga.geopackage.extension.tile_matrix_set.ExtTileMatrixSetDao;
 import mil.nga.geopackage.extension.tile_matrix_set.TileMatrixTablesDao;
@@ -1295,6 +1297,8 @@ public interface GeoPackageCore extends Closeable {
 	ExtTileMatrixSetDao getExtTileMatrixSetDao();
 	TileMatrixTablesDao getTileMatrixTablesDao();
 	TileMatrixVariableWidthsDao getTileMatrixVariableWidthsDao();
+	SemanticAnnotationsDao getSemanticAnnotationsDao();
+	SemanticAnnotationReferenceDao getSemanticAnnotationReferenceDao();
 
 	/**
 	 * Create the Vector Tiles Extension tables if they do not exist
@@ -1316,4 +1320,11 @@ public interface GeoPackageCore extends Closeable {
 	 * @return true if any table is created
 	 */
 	boolean createTileMatrixSetExtension();
+
+	/**
+	 * Create the Semantic Annotations Extension tables if they do not exist
+	 *
+	 * @return true if any table is created
+	 */
+	boolean createSemanticAnnotationsTables();
 }

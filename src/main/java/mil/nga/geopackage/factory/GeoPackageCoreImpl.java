@@ -52,6 +52,10 @@ import mil.nga.geopackage.extension.related.ExtendedRelation;
 import mil.nga.geopackage.extension.related.ExtendedRelationsDao;
 import mil.nga.geopackage.extension.scale.TileScaling;
 import mil.nga.geopackage.extension.scale.TileScalingDao;
+import mil.nga.geopackage.extension.semantic.SemanticAnnotationReference;
+import mil.nga.geopackage.extension.semantic.SemanticAnnotationReferenceDao;
+import mil.nga.geopackage.extension.semantic.SemanticAnnotations;
+import mil.nga.geopackage.extension.semantic.SemanticAnnotationsDao;
 import mil.nga.geopackage.extension.tile_matrix_set.*;
 import mil.nga.geopackage.extension.vector_tiles.VectorTilesFields;
 import mil.nga.geopackage.extension.vector_tiles.VectorTilesFieldsDao;
@@ -69,8 +73,6 @@ import mil.nga.geopackage.metadata.Metadata;
 import mil.nga.geopackage.metadata.MetadataDao;
 import mil.nga.geopackage.metadata.reference.MetadataReference;
 import mil.nga.geopackage.metadata.reference.MetadataReferenceDao;
-import mil.nga.geopackage.property.GeoPackageProperties;
-import mil.nga.geopackage.property.PropertyConstants;
 import mil.nga.geopackage.schema.columns.DataColumns;
 import mil.nga.geopackage.schema.columns.DataColumnsDao;
 import mil.nga.geopackage.schema.constraints.DataColumnConstraints;
@@ -2003,6 +2005,16 @@ public abstract class GeoPackageCoreImpl implements GeoPackageCore {
 	}
 
 	@Override
+	public SemanticAnnotationsDao getSemanticAnnotationsDao() {
+		return (SemanticAnnotationsDao) this.createDao(SemanticAnnotations.class);
+	}
+
+	@Override
+	public SemanticAnnotationReferenceDao getSemanticAnnotationReferenceDao() {
+		return (SemanticAnnotationReferenceDao) this.createDao(SemanticAnnotationReference.class);
+	}
+
+	@Override
 	public boolean createVectorTilesTables() {
 		verifyWritable();
 
@@ -2076,6 +2088,25 @@ public abstract class GeoPackageCoreImpl implements GeoPackageCore {
 		} catch (SQLException e) {
 			throw new GeoPackageException("Failed to check if "
 					+ SymbolImages.TABLE_NAME
+					+ " table exists and create it", e);
+		}
+		return created;
+	}
+
+	@Override
+	public boolean createSemanticAnnotationsTables() {
+		verifyWritable();
+
+		boolean created = false;
+		try {
+			if (!getSemanticAnnotationsDao().isTableExists()) {
+				created = tableCreator.createSemanticAnnotationsExtension() > 0;
+			}
+		} catch (SQLException e) {
+			throw new GeoPackageException("Failed to check if "
+					+ SemanticAnnotations.TABLE_NAME
+					+ " and/or "
+					+ SemanticAnnotationReference.TABLE_NAME
 					+ " table exists and create it", e);
 		}
 		return created;
