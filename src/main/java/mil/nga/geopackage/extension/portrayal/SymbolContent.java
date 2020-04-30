@@ -15,6 +15,7 @@ public class SymbolContent {
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_FORMAT = "format";
     public static final String COLUMN_CONTENT = "content";
+    public static final String COLUMN_URI = "uri";
 
     @DatabaseField(columnName = COLUMN_ID, generatedId = true, canBeNull = false)
     private long id;
@@ -24,6 +25,9 @@ public class SymbolContent {
 
     @DatabaseField(columnName = COLUMN_CONTENT, dataType = DataType.BYTE_ARRAY)
     private byte[] content;
+
+    @DatabaseField(columnName = COLUMN_URI)
+    private String uri;
 
     public SymbolContent() {
     }
@@ -63,5 +67,13 @@ public class SymbolContent {
 
     public void setContent(byte[] content) {
         this.content = content;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }
