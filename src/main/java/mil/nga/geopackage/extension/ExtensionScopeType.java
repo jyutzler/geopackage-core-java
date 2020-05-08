@@ -17,7 +17,12 @@ public enum ExtensionScopeType {
 	/**
 	 * Write Only
 	 */
-	WRITE_ONLY("write-only");
+	WRITE_ONLY("write-only"),
+
+	/**
+	 * Metadata
+	 */
+	METADATA("metadata");
 
 	/**
 	 * Query value
