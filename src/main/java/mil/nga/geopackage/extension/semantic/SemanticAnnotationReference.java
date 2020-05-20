@@ -22,7 +22,7 @@ public class SemanticAnnotationReference {
     private String columnName;
 
     @DatabaseField(columnName = COLUMN_KEY_VALUE, canBeNull = false)
-    private long keyValue;
+    private Long keyValue;
 
     @DatabaseField(columnName = COLUMN_SEMANTIC_ANNOTATION_ID, canBeNull = false)
     private long saID;
@@ -43,11 +43,11 @@ public class SemanticAnnotationReference {
         this.columnName = columnName;
     }
 
-    public long getKeyValue() {
+    public Long getKeyValue() {
         return keyValue;
     }
 
-    public void setKeyValue(long keyValue) {
+    public void setKeyValue(Long keyValue) {
         this.keyValue = keyValue;
     }
 
